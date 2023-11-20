@@ -1,4 +1,4 @@
-package com.rxjavasamples.kotlin.operators
+package com.rxjavasamples.kotlin.operators.all_together
 
 import android.annotation.SuppressLint
 import io.reactivex.rxjava3.core.Observable

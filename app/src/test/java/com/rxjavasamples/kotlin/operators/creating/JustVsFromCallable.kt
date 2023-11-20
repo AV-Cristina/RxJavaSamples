@@ -1,4 +1,4 @@
-package com.rxjavasamples.kotlin.create
+package com.rxjavasamples.kotlin.operators.creating
 
 import android.annotation.SuppressLint
 import io.reactivex.rxjava3.core.Observable
@@ -8,7 +8,7 @@ import org.junit.Test
 class JustVsFromCallable {
 
     @Test
-    fun justDemo() {
+    fun justSample() {
         // Метод или лямбда выражение переданное just выполняется сразу же в том потоке,
         // в котором мы подписались и при новой подписке больше не выполняется
         val source = Observable.just(System.currentTimeMillis())
@@ -20,7 +20,7 @@ class JustVsFromCallable {
     }
 
     @Test
-    fun fromCallableDemoSample() {
+    fun fromCallableSample() {
         val source = Observable.fromCallable {
             // это выполняется только тогда,
             // когда вызывается метод subscribe()

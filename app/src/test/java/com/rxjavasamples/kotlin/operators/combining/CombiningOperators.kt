@@ -1,8 +1,8 @@
-package com.rxjavasamples.kotlin.operators
+package com.rxjavasamples.kotlin.operators.combining
 
 
 import android.annotation.SuppressLint
-import com.rxjavasamples.kotlin.create.JustVsFromCallable.Companion.sleep
+import com.rxjavasamples.kotlin.operators.creating.JustVsFromCallable.Companion.sleep
 import io.reactivex.rxjava3.core.Observable
 import org.junit.Test
 import java.util.concurrent.TimeUnit

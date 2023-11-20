@@ -1,7 +1,7 @@
-package com.rxjavasamples.kotlin.operators
+package com.rxjavasamples.kotlin.operators.utility
 
 import android.annotation.SuppressLint
-import com.rxjavasamples.kotlin.create.JustVsFromCallable.Companion.sleep
+import com.rxjavasamples.kotlin.operators.creating.JustVsFromCallable.Companion.sleep
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.schedulers.Schedulers
 import org.junit.Test

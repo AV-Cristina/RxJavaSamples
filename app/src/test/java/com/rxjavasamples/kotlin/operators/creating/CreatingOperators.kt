@@ -1,4 +1,4 @@
-package com.rxjavasamples.kotlin.create
+package com.rxjavasamples.kotlin.operators.creating
 
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Observer
