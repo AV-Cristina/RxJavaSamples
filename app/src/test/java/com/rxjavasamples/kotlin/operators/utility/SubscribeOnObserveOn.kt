@@ -16,7 +16,7 @@ class SubscribeOnObserveOn {
             // Источник будет передавать элементы в поток computation
             .subscribeOn(Schedulers.computation())
             .subscribe { i ->
-                println("Received " + " on thread " + Thread.currentThread().name)
+                println("Received $i on thread " + Thread.currentThread().name)
             }
         sleep(5000)
     }
@@ -30,7 +30,7 @@ class SubscribeOnObserveOn {
             // Создает новый поток, переключаемся на него, получаем результат
             .observeOn(Schedulers.newThread())
             .subscribe { i ->
-                println("Received " + " on thread " + Thread.currentThread().name)
+                println("Received $i on thread " + Thread.currentThread().name)
             }
         sleep(5000)
     }
