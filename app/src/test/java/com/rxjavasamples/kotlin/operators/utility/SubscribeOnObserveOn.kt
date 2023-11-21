@@ -22,6 +22,19 @@ class SubscribeOnObserveOn {
     }
 
     @Test
+    fun multipleSubscribeOnSample() {
+        Observable.just("Red", "Orange", "Yellow", "Green", "Blue", "Purple")
+            // Сработает наиболее близкое к источнику переключение на указанный поток
+            .subscribeOn(Schedulers.computation())
+            .map(String::length)
+            .filter { l -> l > 4 }
+            // Переключение на поток io() будет проигнорировано
+            .subscribeOn(Schedulers.io())
+            .subscribe { s -> println("Received $s on thread ${Thread.currentThread().name}") }
+        sleep(5000)
+    }
+
+    @Test
     fun observeOnSample() {
         val source = Observable.just(1, 2)
         source
