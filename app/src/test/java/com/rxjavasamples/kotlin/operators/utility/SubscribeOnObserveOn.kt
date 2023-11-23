@@ -66,4 +66,20 @@ class SubscribeOnObserveOn {
             }
         sleep(5000)
     }
+
+    @Test
+    fun unsubscribeOnSample() {
+        val disposable = Observable.interval(1, TimeUnit.SECONDS)
+            // Если при отписке требуется выполнить какую-то тяжелую работу,
+            .doOnDispose { println("Disposing on thread " + Thread.currentThread().name) }
+            // то перед отпиской можно переключиться на другой планировщик.
+            .unsubscribeOn(Schedulers.io())
+            // По умолчанию interval отработает на Computation
+            .subscribe { i ->
+                println("Received $i on thread " + Thread.currentThread().name)
+            }
+        sleep(3000)
+        disposable.dispose()
+        sleep(3000)
+    }
 }
