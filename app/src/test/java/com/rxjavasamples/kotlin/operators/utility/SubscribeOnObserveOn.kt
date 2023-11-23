@@ -5,6 +5,7 @@ import com.rxjavasamples.kotlin.operators.creating.JustVsFromCallable.Companion.
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.schedulers.Schedulers
 import org.junit.Test
+import java.util.concurrent.TimeUnit
 
 @SuppressLint("CheckResult")
 class SubscribeOnObserveOn {
@@ -28,9 +29,27 @@ class SubscribeOnObserveOn {
             .subscribeOn(Schedulers.computation())
             .map(String::length)
             .filter { l -> l > 4 }
-            // Переключение на поток io() будет проигнорировано
+            // Переключение на поток io будет проигнорировано
             .subscribeOn(Schedulers.io())
             .subscribe { s -> println("Received $s on thread ${Thread.currentThread().name}") }
+        sleep(5000)
+    }
+
+    @Test
+    fun intervalSubscribeOnSample() {
+        val interval = Observable.interval(1, TimeUnit.SECONDS)
+        // Переключения на io, т к для оператора interval по умолчанию используется computation
+        interval.subscribeOn(Schedulers.io())
+        interval.subscribe { i -> println("Received $i on thread ${Thread.currentThread().name}") }
+        sleep(5000)
+    }
+
+    @Test
+    fun intervalWithParameterSubscribeOnSample() {
+        // Если для оператора с дефолтным планировщиком, необходимо задать другой планировщик,
+        // то его необходимо передать третьим аргументом при вызове оператора
+        val interval = Observable.interval(1, TimeUnit.SECONDS, Schedulers.newThread())
+        interval.subscribe { i -> println("Received $i on thread ${Thread.currentThread().name}") }
         sleep(5000)
     }
 
