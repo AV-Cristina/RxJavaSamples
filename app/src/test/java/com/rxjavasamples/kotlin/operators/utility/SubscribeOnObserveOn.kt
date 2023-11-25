@@ -38,7 +38,8 @@ class SubscribeOnObserveOn {
     @Test
     fun intervalSubscribeOnSample() {
         val interval = Observable.interval(1, TimeUnit.SECONDS)
-        // Переключения на io, т к для оператора interval по умолчанию используется computation
+        // Переключения на io не произойдет,
+        // т к для оператора interval по умолчанию используется computation
         interval.subscribeOn(Schedulers.io())
         interval.subscribe { i -> println("Received $i on thread ${Thread.currentThread().name}") }
         sleep(5000)
@@ -62,8 +63,39 @@ class SubscribeOnObserveOn {
             // Создает новый поток, переключаемся на него, получаем результат
             .observeOn(Schedulers.newThread())
             .subscribe { i ->
-                println("Received $i on thread " + Thread.currentThread().name)
+                println("Received $i on thread ${Thread.currentThread().name}")
             }
         sleep(5000)
+    }
+
+    @Test
+    fun multipleObserveOnSample() {
+        Observable.just(1, 2)
+            .subscribeOn(Schedulers.computation())
+            // Переключаемся на новый поток
+            .observeOn(Schedulers.newThread())
+            // Переключаемся на computation
+            .observeOn(Schedulers.computation())
+            // Подписчик получит результат в computation
+            .subscribe { i ->
+                println("Received $i on thread ${Thread.currentThread().name}")
+            }
+        sleep(3000)
+    }
+
+    @Test
+    fun unsubscribeOnSample() {
+        val disposable = Observable.interval(1, TimeUnit.SECONDS)
+            // Если при отписке требуется выполнить какую-то тяжелую работу,
+            .doOnDispose { println("Disposing on thread " + Thread.currentThread().name) }
+            // то перед отпиской можно переключиться на другой планировщик.
+            .unsubscribeOn(Schedulers.io())
+            // По умолчанию interval отработает на Computation
+            .subscribe { i ->
+                println("Received $i on thread " + Thread.currentThread().name)
+            }
+        sleep(3000)
+        disposable.dispose()
+        sleep(3000)
     }
 }
