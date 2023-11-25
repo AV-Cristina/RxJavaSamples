@@ -1,3 +1,4 @@
+# RxJava Samples
 В проекте содержатся примеры использования перечисленных ниже операторов.
 Полный список операторов можно посмотреть [здесь](https://reactivex.io/documentation/operators.html#categorized)
 
@@ -9,6 +10,7 @@
 `fromIterable`
 `interval`
 `just`
+`repeat`
 
 ### Трансформирующие (Transforming)
 `collect`
@@ -28,6 +30,11 @@
 `combineLatest`
 `merge`
 `zip`
+
+### Обработки ошибок (Error Handling)
+`onErrorReturnItem`
+`onErrorResumeNext`
+`retry`
 
 ### Утилитные (Utility)
 `subscribeOn`
