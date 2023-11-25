@@ -11,6 +11,7 @@ class ErrorHandling {
     fun onErrorReturnItemSample() {
         Observable.just(5, 2, 4, 0, 3, 2)
             .map { i -> 10 / i }
+            // В случае ошибки вместо неё вернется указанное значение
             .onErrorReturnItem(-1)
             .subscribe { i -> println("Received: $i") }
     }
