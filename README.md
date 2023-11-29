@@ -1,46 +1,61 @@
 # RxJava Samples
-В проекте содержатся примеры использования перечисленных ниже операторов.
+## Операторы по категориям:
+В проекте содержатся примеры использования перечисленных ниже операторов.  
 Полный список операторов можно посмотреть [здесь](https://reactivex.io/documentation/operators.html#categorized)
 
-## Операторы по категориям:
-
 ### Создающие Observable (Creating Observables)
-`create`
-`fromArray`
-`fromIterable`
-`interval`
-`just`
-`repeat`
+* `create`
+* `fromArray`
+* `fromIterable`
+* `interval`
+* `just`
+* `repeat`
 
 ### Трансформирующие (Transforming)
-`collect`
-`flatMap`
-`groupBy`
-`map`
+* `collect`
+* `flatMap`
+* `groupBy`
+* `map`
 
 ### Фильтрующие (Filtering)
-`debounce`
-`distinct`
-`elementAt`
-`filter` 
-`first` 
-`take`
+* `debounce`
+* `distinct`
+* `elementAt`
+* `filter` 
+* `first` 
+* `take`
 
 ### Комбинирующие (Combining)
-`combineLatest`
-`merge`
-`zip`
+* `combineLatest`
+* `merge`
+* `zip`
 
 ### Обработки ошибок (Error Handling)
-`onErrorReturnItem`
-`onErrorResumeNext`
-`retry`
+* `onErrorReturnItem`
+* `onErrorResumeNext`
+* `retry`
 
 ### Утилитные (Utility)
-`subscribeOn`
-`ObserveOn`
+* `subscribeOn`
+* `ObserveOn`
 
 ### Условные и булевы  (Conditional and Boolean)
-`distinctUntilChanged`
-`skipWhile`
-`takeWhile`
+* `distinctUntilChanged`
+* `skipWhile`
+* `takeWhile`  
+
+  
+## Типы Subject
+
+`Subject` одновременно является и `Observer` и `Observable`. Т.е. он может подписываться на Observable и получать от них события, и, в то же время, у него могут быть подписчики, которым он эти события будет пересылать.
+
+* `PublishSubject` - самый простой тип `Subject`. Принимает события и отдаёт их всем текущим подписчикам.
+
+* `BehaviorSubject` - помимо того, что он как `PublishSubject` отправляет все события, порожденные после подписки, для нового подписчика он отправляет последнее переданное ему до этого событие. Если ни одного события еще не было отправлено, то он отправит значение по умолчанию, если оно было задано.
+
+* `ReplaySubject` - помимо того, что он отправляет все события, порожденные после подписки, для новых подписчиков он сначала передаст все события, которые были отправлены им ранее. По умолчанию кэшируются все события, отправленные с момента создания Subject, для бесконечных или долгих потоков следует ограничить кеширование по количеству событий `createWithSize()`, времени `createWithTime()` или и тому и другому, в зависимости от того, что произойдет раньше `createWithTimeAndSize()`.
+
+* `AsyncSubject` - передает подписчикам только последнее событие, когда их последовательность завершена событием onComplete. Поэтому его можно использовать только с не бесконечными источниками событий.
+
+* `UnicastSubject` - сохраняет все переданные ему данные пока некий `Observer` подписан на него, потом передает все полученные данные сразу и очищает кэш. На него может подписаться только один подписчик, и даже после того, как этот подписчик отпишется, никто больше не сможет не него подписаться.
+
