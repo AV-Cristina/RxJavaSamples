@@ -2,8 +2,8 @@ package com.rxjavasamples.data
 
 import com.google.gson.annotations.SerializedName
 
-data class Movie(
-//    var posterPath: String,
+class Movie(
+    posterPath: String,
     @SerializedName("adult")
     var isAdult: Boolean,
     @SerializedName("overview")
@@ -32,5 +32,5 @@ data class Movie(
 ) {
     @SerializedName("poster_path")
     var posterPath: String? = null
-    get() = "https://image.tmdb.org/t/p/w500$field"
+        get() = "https://image.tmdb.org/t/p/w500$field"
 }
