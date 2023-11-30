@@ -1,7 +1,12 @@
+import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
 }
+
+// Здесь читается API-ключ из local.properties
+val movieApi: String = gradleLocalProperties(rootDir).getProperty("THE_MOVIE_API")
 
 android {
     namespace = "com.rxjavasamples"
@@ -17,7 +22,13 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    buildFeatures.buildConfig = true
+
     buildTypes {
+        debug {
+            isMinifyEnabled = false
+            buildConfigField("String", "API_URL", movieApi)
+        }
         release {
             isMinifyEnabled = false
             proguardFiles(

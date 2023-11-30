@@ -36,7 +36,8 @@ class MainActivity : AppCompatActivity() {
 
     companion object {
         private val TAG = MainActivity::class.java.simpleName
-        // TODO - insert your themoviedb.org API KEY here
-        private val API_KEY = ""
+        // TODO: insert string with your themoviedb.org API KEY in file local.properties
+        // string should look like this: THE_MOVIE_API="your API KEY here"
+        private const val API_KEY = BuildConfig.API_URL
     }
 }
