@@ -3,7 +3,6 @@ import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
-    id("kotlin-kapt")
 }
 
 // Здесь читается API-ключ из local.properties
@@ -11,7 +10,7 @@ val movieApi: String = gradleLocalProperties(rootDir).getProperty("THE_MOVIE_API
 
 android {
     namespace = "com.rxjavasamples"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.rxjavasamples"
@@ -25,7 +24,6 @@ android {
 
     buildFeatures {
         buildConfig = true
-        dataBinding = true
     }
 
     buildTypes {
