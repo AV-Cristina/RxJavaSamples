@@ -12,4 +12,11 @@ interface MovieApiInterface {
         @Query("api_key") apiKey: String,
         @Query("language") language: String
     ): Single<MoviesResponse>
+
+    @GET("search/movie")
+    fun getMovie(
+        @Query("api_key") apiKey: String,
+        @Query("query") query: String,
+        @Query("language") language: String
+    ): Single<MoviesResponse>
 }
