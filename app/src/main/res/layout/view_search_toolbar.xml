@@ -1,51 +1,54 @@
- <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/search_container"
-        android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:background="@color/colorPrimary"
-        android:orientation="horizontal">
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/search_container"
+    android:layout_width="match_parent"
+    android:layout_height="70dp"
+    android:background="@color/colorBackground"
+    android:orientation="horizontal">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/search_background">
+
+        <EditText
+            android:id="@+id/search_edit_text"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="8dp"
-            android:background="@drawable/search_background">
+            android:autofillHints="@string/search_hint"
+            android:background="@drawable/search_background"
+            android:drawableStart="@drawable/ic_search"
+            android:drawablePadding="8dp"
+            android:imeOptions="actionDone"
+            android:inputType="textShortMessage"
+            android:maxLines="1"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:singleLine="true"
+            android:textColor="@color/colorPrimaryDark"
+            android:textColorHint="@color/colorHint"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:hint="@string/search_hint" />
 
-            <EditText
-                android:id="@+id/search_edit_text"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:autofillHints="@string/search_hint"
-                android:background="@drawable/search_background"
-                android:drawableStart="@drawable/ic_search"
-                android:drawablePadding="8dp"
-                android:imeOptions="actionDone"
-                android:inputType="textShortMessage"
-                android:maxLines="1"
-                android:paddingStart="8dp"
-                android:paddingEnd="8dp"
-                android:singleLine="true"
-                android:textColorHint="@color/colorHint"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:hint="@string/search_hint" />
+        <ImageView
+            android:id="@+id/delete_text_button"
+            android:layout_width="20dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:contentDescription="@string/content_description"
+            android:src="@drawable/ic_delete"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:visibility="visible" />
 
-            <ImageView
-                android:id="@+id/delete_text_button"
-                android:layout_width="20dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
-                android:contentDescription="@string/contentDescription"
-                android:src="@drawable/ic_delete"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:visibility="visible" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </FrameLayout>
+</FrameLayout>
