@@ -29,10 +29,17 @@ class MainActivity : AppCompatActivity() {
         searchToolbar
             .onTextChangedObservable
             .map { it.trim() } // удаляем пробелы вначале и в конце текста, для более точного поиска
+            .doOnNext { Log.d("THREAD: ", Thread.currentThread().name) }
             .debounce(500, TimeUnit.MILLISECONDS) // добавляем задержку перед отправкой запроса, чтобы не заддосить сервер большим кол-вом запросов
+            .doOnNext { Log.d("THREAD after debounce: ", Thread.currentThread().name) }
             .filter { it.length > 3 }  // фильтруем запросы длинной не менее 3 символов
+            .doOnNext { Log.d("THREAD: ", Thread.currentThread().name) }
             .observeOn(Schedulers.io()) // переключаемся на io для выполнения запроса в сеть
-            .flatMapSingle { MovieApiClient.apiClient.getMovie(API_KEY, it, "ru") }
+            .flatMapSingle {
+                Log.d("THREAD: ", Thread.currentThread().name)
+                MovieApiClient.apiClient.getMovie(API_KEY, it, "ru")
+            }
+            .doOnNext { Log.d("THREAD  after flatMap: ", Thread.currentThread().name) }
             .observeOn(AndroidSchedulers.mainThread()) // переключаемся на main, чтобы обновить UI
             .subscribe({
                 setMovies(it.results)
